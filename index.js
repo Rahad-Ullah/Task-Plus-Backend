@@ -37,8 +37,18 @@ async function run() {
         const email = req.query.email;
         const filter = {email: email}
         const result = await taskCollection.find(filter).toArray()
+        console.log(result)
         res.send(result)
     })
+
+    app.post("/tasks", async (req, res) => {
+        const task = req.body;
+        const result = await taskCollection.insertOne(task)
+        console.log(result)
+        res.send(result)
+    })
+    
+    
     
     
     // Send a ping to confirm a successful connection
