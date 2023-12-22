@@ -30,6 +30,15 @@ async function run() {
 
     const database = client.db("TaskPlus");
     const taskCollection = database.collection("tasks")
+
+
+    // get all tasks of specific user
+    app.get("/tasks", async (req, res) => {
+        const email = req.query.email;
+        const filter = {email: email}
+        const result = await taskCollection.find(filter).toArray()
+        res.send(result)
+    })
     
     
     // Send a ping to confirm a successful connection
